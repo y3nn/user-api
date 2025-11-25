@@ -2,6 +2,8 @@ module auth
 
 go 1.24.3
 
+require github.com/go-chi/chi v1.5.5
+
 require (
 	github.com/bytedance/sonic v1.14.0 // indirect
 	github.com/bytedance/sonic/loader v0.3.0 // indirect
@@ -9,7 +11,6 @@ require (
 	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
 	github.com/gin-contrib/sse v1.1.0 // indirect
 	github.com/gin-gonic/gin v1.11.0 // indirect
-	github.com/go-chi/chi v1.5.5 // indirect
 	github.com/go-chi/chi/v5 v5.2.3 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
 	github.com/go-playground/universal-translator v0.18.1 // indirect

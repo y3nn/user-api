@@ -1,13 +1,16 @@
 package main
 
 import (
-	"auth/internal/handlers"
+	"auth/routers"
 	"fmt"
+	"log"
 	"net/http"
 )
 
 func main() {
-	r :=  handlers.NewRouter()
-	fmt.Println("listen server on: http://localhost:8080")
-	http.ListenAndServe(":8080",r)
+	r :=  routers.NewRouter()
+	fmt.Println("✅ '  listen server on: http://localhost:8080")
+	if err := http.ListenAndServe(":8080",r); err != nil { 
+		log.Fatal(err)
+	}
 }
