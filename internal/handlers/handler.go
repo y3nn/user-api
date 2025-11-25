@@ -16,8 +16,6 @@ type Hello_Response struct  {
 type Time_Response struct { 
 	Time time.Time `json:"Time"`
 }
-
-
 func HelloHandler(w http.ResponseWriter, r * http.Request) {
 	res := Hello_Response{Status: "Hello 🔥"}
 	w.Header().Add("Content-Type","application/json")
@@ -25,7 +23,8 @@ func HelloHandler(w http.ResponseWriter, r * http.Request) {
 }
 
 func TimeHandler(w http.ResponseWriter, r *http.Request) {
-	res := Time_Response{Time: time.Now()}
+	format :=  time.Now()
+	res := Time_Response{Time: format}
 	w.Header().Add("Content-Type","application/json")
 	w.Write([]byte("⏰ Time now"))
 	json.NewEncoder(w).Encode(&res)
