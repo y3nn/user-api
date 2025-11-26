@@ -12,5 +12,6 @@ func NewRouter() *chi.Mux  {
 	r.Get("/hello",middleware.HelloMiddleWare(handler.HelloHandler))
 	r.Get("/time",handler.TimeHandler)
 	r.Get("/status",handler.StatusHandler)
+	r.Post("/json",handler.AcceptAndGiveJSON)
 	return  r 
 }
