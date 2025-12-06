@@ -12,7 +12,10 @@ import (
 func InitPool() *pgxpool.Pool {
 	connstr := os.Getenv("DATABASE_URL")
 	if connstr == "" {
-		connstr = "postgresql://yan:123123123@localhost:5432/yoyo?sslmode=disable"
+		dbUser := os.Getenv("POSTGRES_USER")
+		dbPass := os.Getenv("POSTGRES_PASSWORD")
+		dbName := os.Getenv("POSTGRES_DB")
+		connstr = fmt.Sprintf("postgresql://%s:%s@localhost:5432/%s?sslmode=disable", dbUser, dbPass, dbName)
 	}
 
 	pool, err := pgxpool.New(context.Background(), connstr)
