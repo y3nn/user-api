@@ -24,7 +24,7 @@ func main() {
 	r.Get("/user/{id}", middleware.ReadUser(userRepo))      // watch(read)
 	r.Get("/users", middleware.ListMiddleWare(*userRepo))   // list
 	r.Delete("/user/{id}", middleware.DeleteUser(userRepo)) // delete
-	r.Patch("/user/{id}", middleware.UpdateUser(*userRepo))
+	r.Patch("/user/{id}", middleware.UpdateUser(*userRepo)) // update
 
 	fmt.Println("✅ |  Listen server on: http://localhost:8080")
 	if err := http.ListenAndServe(":8080", r); err != nil {
