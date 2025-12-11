@@ -16,13 +16,11 @@ It uses PostgreSQL 🐘 for storing user data and is easy to run with Docker �
 ## 🗂️ Project Structure
 
 ```txt
-yoyo/
+user-api/
 ├── cmd/            # 🚀 Application entry point
 ├── internal/       
-│   ├── service/    # 🛠️ Business logic
 │   ├── repository/ # 🗄️ Database interaction (Postgres)
 │   └── model/      # 👤 User model
-├── pkg/            # 🧩 Shared code (if any)
 ├── go.mod
 ├── Dockerfile
 └── docker-compose.yaml
