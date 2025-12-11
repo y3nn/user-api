@@ -1,29 +1,50 @@
-# 🌟 yoyo — Clean & Minimal Go Architecture Example
+# simple  tiny users-api
 
-**yoyo** is a lightweight, framework-free example that demonstrates how to structure Go applications in a clean, understandable, and maintainable way.  
-It serves as a practical reference for developers who want to build services with clarity, simplicity, and architectural discipline — without unnecessary abstractions.
-
----
-
-## ✨ Key Ideas
-
-- 🧩 **Clarity first** — simple, readable project layout  
-- 📦 **Logical package boundaries** — clear separation of responsibilities  
-- ⚡ **Minimalism** — no frameworks, no magic, only Go  
-- 🧠 **Easy to understand** — suitable as a teaching/reference example  
-- 🔧 **Extendable** — structure scales naturally as the project grows  
+This project is a minimal 👤 user API written in Go 🦦.  
+It uses PostgreSQL 🐘 for storing user data and is easy to run with Docker 🐳.
 
 ---
 
-## 📁 Project Structure
+## ✨ Features
+
+- ⚡ User CRUD API in Go (no frameworks)
+- 🐘 PostgreSQL database
+- 🐳 Easy Docker setup
+
+---
+
+## 🗂️ Project Structure
 
 ```txt
 yoyo/
-├── cmd/            # Application entry points
-│   └── app/        # Main service executable
-├── internal/       # Core domain & business logic
-│   ├── service/    # Application services
-│   ├── repo/       # Storage & repositories
-│   └── model/      # Entities & domain models
-├── pkg/            # Shared utilities (optional)
-└── go.mod
+├── cmd/            # 🚀 Application entry point
+├── internal/       
+│   ├── service/    # 🛠️ Business logic
+│   ├── repository/ # 🗄️ Database interaction (Postgres)
+│   └── model/      # 👤 User model
+├── pkg/            # 🧩 Shared code (if any)
+├── go.mod
+├── Dockerfile
+└── docker-compose.yaml
+```
+
+---
+
+## 🚦 Getting Started
+
+1. 📝 **Copy** `.env.example` **to** `.env` **and set your database values.**
+
+2. 🐳 **Build & start everything using Docker Compose:**
+   ```bash
+   docker-compose up --build
+   ```
+   This will run the API (on port 8080) and the Postgres DB.
+
+3. 📡 **API endpoints:**
+   - `POST   /users` — ➕ create user
+   - `GET    /users/{id}` — 🔍 get user by id
+   - `GET    /users` — 📃 list all users
+
+---
+
+That's it 🎉 — clean, simple Go user API with Postgres and Docker!

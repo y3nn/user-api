@@ -20,14 +20,13 @@ func InitPool() *pgxpool.Pool {
 
 	pool, err := pgxpool.New(context.Background(), connstr)
 	if err != nil {
-		log.Fatalf("🚫 | Ошибка иницилизации  пула: %v \n", err)
+		log.Fatalf("🚫 | Pool initialization error: %v \n", err)
 	}
 
 	err = pool.Ping(context.Background())
 	if err != nil {
-		log.Fatalf("🚫 | Не удалось проверить соединение с БД (Ping): %v", err)
-
+		log.Fatalf("🚫 | Failed to check database connection (Ping): %v", err)
 	}
-	fmt.Println("✅ | Пул {PostgreSQL} иницилизирован! ")
+	fmt.Println("✅ | Pool {PostgreSQL} initialized! ")
 	return pool
 }

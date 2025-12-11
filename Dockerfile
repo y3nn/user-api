@@ -1,27 +1,26 @@
-# --- Этап 1: Сборщик (Builder Stage) ---
+# --- Stage 1: Builder Stage ---
 FROM golang:1.24.3 AS builder
 
-# Устанавливаем рабочую директорию в контейнере
+# Set working directory in the container
 WORKDIR /app 
 
-# Копируем файлы go.mod и go.sum и скачиваем зависимости
+# Copy go.mod and go.sum files and download dependencies
 COPY go.mod .
 COPY go.sum .
 RUN go mod download 
 
-#Копируем весь остальной код/папки
+# Copy all other source code and directories
 COPY . .
-# Собираем исполняемый файл. CGO_ENABLED=0 для статической сборки, -o app для имени файла
+# Build the executable. CGO_ENABLED=0 for static build, -o app sets the output filename
 RUN CGO_ENABLED=0 go build -o app ./cmd
 
-# --- Этап 2: Финальный образ (Final Stage) ---
+# --- Stage 2: Final Image ---
 FROM scratch
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /app/app /app/app
 
-
-# Объявляем порт (информативно, не открывает его)
+# Expose port (informational only, does not open it)
 EXPOSE 8080
-# Команда, которая запускается при старте контейнера
+# Command to run when the container starts
 CMD [ "/app/app" ]

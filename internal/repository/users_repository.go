@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"auth/backend/model"
+	"auth/internal/model"
 	"context"
 	"fmt"
 	"log"
@@ -38,7 +38,7 @@ func (r *UsersRepository) ListUsers(ctx context.Context) ([]*model.User, error) 
 
 	rows, err := r.db.Query(ctx, query)
 	if err != nil {
-		return nil, fmt.Errorf("ERROR: Rows - %v", err)
+		return nil, fmt.Errorf("❌ ERROR: Failed to fetch rows - %v", err)
 	}
 
 	defer rows.Close()
@@ -47,12 +47,12 @@ func (r *UsersRepository) ListUsers(ctx context.Context) ([]*model.User, error) 
 	for rows.Next() {
 		var u model.User
 		if err := rows.Scan(&u.ID, &u.Name, &u.Email); err != nil {
-			return nil, fmt.Errorf("ERROR: SCAN ROWS - %v", err)
+			return nil, fmt.Errorf("❌ ERROR: Failed to scan rows - %v", err)
 		}
 		users = append(users, &u)
 	}
 	if err := rows.Err(); err != nil {
-		return nil, fmt.Errorf("ERROR: [FOR] ROWS - %v", err)
+		return nil, fmt.Errorf("❌ ERROR: Rows iteration error - %v", err)
 	}
 	return users, nil
 }
@@ -70,11 +70,11 @@ func (r *UsersRepository) UpdateUser(ctx context.Context, u *model.User) error {
 	`
 	result, err := r.db.Exec(ctx, query, u.Name, u.Email, u.ID)
 	if err != nil {
-		return fmt.Errorf("ERROR: failed to update user - %v", err)
+		return fmt.Errorf("❌ ERROR: Failed to update user - %v", err)
 	}
 	if result.RowsAffected() == 0 {
-		log.Printf("⚠️ | Не удалось обновить пользователя с id %d (пользователь не найден или данные не изменились)", u.ID)
-		return fmt.Errorf("ERROR: user with id[%d] not found or no changes", u.ID)
+		log.Printf("⚠️ | Failed to update user with id %d (user not found or no data was changed)", u.ID)
+		return fmt.Errorf("❌ ERROR: user with id[%d] not found or no changes", u.ID)
 	}
 	return nil
 }

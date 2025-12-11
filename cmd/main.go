@@ -1,18 +1,17 @@
 package main
 
 import (
-	"auth/backend/db"
-	"auth/backend/handlers/middleware"
-	"auth/backend/repository"
+	"auth/internal/db"
+	"auth/internal/handlers/middleware"
+	"auth/internal/repository"
+	routers "auth/router"
 	"fmt"
 	"log"
 	"net/http"
-
-	"github.com/go-chi/chi"
 )
 
 func main() {
-	r := chi.NewRouter()
+	r := routers.NewRouter()
 
 	pool := db.InitPool()
 	defer pool.Close()
